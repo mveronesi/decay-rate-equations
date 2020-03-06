@@ -30,7 +30,7 @@ def cpv_leg(r,delta,gamma,beta):
     leg = r'$r$ = '+'{:.1f}'.format(r) + '\n'
     leg += r'$\delta$ = '+'{:.0f}'.format(delta) + r'$^{\circ}$' + '\n'
     leg += r'$\gamma$ = '+'{:.0f}'.format(gamma) + r'$^{\circ}$' + '\n'
-    leg += r'$\beta_{s}$ = '+'{:.0f}'.format(gamma) + r' mrad'
+    leg += r'$\beta_{s}$ = '+'{:.0f}'.format(beta) + r' mrad'
     return leg
 
 def acc_leg(a,n,b,beta,cut):
