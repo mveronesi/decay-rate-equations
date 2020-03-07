@@ -9,7 +9,7 @@ from plot_asymmetries import plot_asymmetries
 
 # Widgets
 # decay rate
-dm=widgets.BoundedFloatText(value=17.768, min=0, max=20, step=0.001, continuous_update=False, description=r'$\Delta m_{s}$ [ps$^{-1}$]')
+dm=widgets.BoundedFloatText(value=17.757, min=0, max=20, step=0.001, continuous_update=False, description=r'$\Delta m_{s}$ [ps$^{-1}$]')
 dg=widgets.BoundedFloatText(value=0.085, min=0, max=1, step=0.001, continuous_update=False, description=r'$\Delta \Gamma_{s}$ [ps$^{-1}$]')
 gs=widgets.BoundedFloatText(value=0.664, min=0, max=1, step=0.001, continuous_update=False, description=r'$\Gamma_{s}$ [ps$^{-1}$]')
 r=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.1, continuous_update=False, description=r'$r$')
