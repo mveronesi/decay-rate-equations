@@ -2,6 +2,8 @@ name: dec-rate
 dependencies:
   - numpy
   - matplotlib
-  - math
-  - mplhep
   - ipywidgets
+  - pip
+  - pip:
+    - mplhep
+    - math
