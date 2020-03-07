@@ -1,9 +1,11 @@
 name: dec-rate
+channels:
+  - conda-forge
 dependencies:
   - numpy
   - matplotlib
   - ipywidgets
+  - appmode
   - pip
   - pip:
     - mplhep
-    - math
