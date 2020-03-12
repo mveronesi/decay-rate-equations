@@ -18,7 +18,7 @@ def B_f_obs(t,dm,dg,gs,
             sigma_t=0,
             omega_b=0,omega_bar=0,eff_b=1,eff_bar=1,
             a_prod=0,a_det=0):
-    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_b*((1-omega_b)*(1+a_prod)*(1+a_det)*B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_bar*(1-a_prod)*(1+a_det)*Bbar_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
+    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_b*((1-omega_b)*(1+a_prod)*(1+a_det)*B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_b*(1-a_prod)*(1+a_det)*Bbar_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
 
 def Bbar_f_obs(t,dm,dg,gs,
                r,delta,gamma,beta,
@@ -26,7 +26,7 @@ def Bbar_f_obs(t,dm,dg,gs,
                sigma_t=0,
                omega_b=0,omega_bar=0,eff_b=1,eff_bar=1,
                a_prod=0,a_det=0):
-    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_bar*((1-omega_bar)*(1-a_prod)*(1+a_det)*Bbar_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_b*(1+a_prod)*(1+a_det)*B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
+    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_bar*((1-omega_bar)*(1-a_prod)*(1+a_det)*Bbar_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_bar*(1+a_prod)*(1+a_det)*B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
 
 def B_fbar_obs(t,dm,dg,gs,
                r,delta,gamma,beta,
@@ -34,7 +34,7 @@ def B_fbar_obs(t,dm,dg,gs,
                sigma_t=0,
                omega_b=0,omega_bar=0,eff_b=1,eff_bar=1,
                a_prod=0,a_det=0):
-    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_b*((1-omega_b)*(1+a_prod)*(1-a_det)*B_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_bar*(1-a_prod)*(1-a_det)*Bbar_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
+    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_b*((1-omega_b)*(1+a_prod)*(1-a_det)*B_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_b*(1-a_prod)*(1-a_det)*Bbar_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
 
 def Bbar_fbar_obs(t,dm,dg,gs,
                   r,delta,gamma,beta,
@@ -42,7 +42,7 @@ def Bbar_fbar_obs(t,dm,dg,gs,
                   sigma_t=0,
                   omega_b=0,omega_bar=0,eff_b=1,eff_bar=1,
                   a_prod=0,a_det=0):
-    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_bar*((1-omega_bar)*(1-a_prod)*(1-a_det)*Bbar_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_b*(1+a_prod)*(1-a_det)*B_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
+    return eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc)*eff_bar*((1-omega_bar)*(1-a_prod)*(1-a_det)*Bbar_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t)+omega_bar*(1+a_prod)*(1-a_det)*B_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t))
 
 def Untagged_f_obs(t,dm,dg,gs,
                    r,delta,gamma,beta,

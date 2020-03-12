@@ -110,14 +110,15 @@ def plot_res(ax,sigma_t,xmin=-0.35,xmax=0.35,title='Time Resolution',ytitle='',l
     dt = np.linspace(xmin,xmax,pp)
     label = r'$G(\Delta t;\sigma_t)$'
     if sigma_t>0:
-        res_func = 1./(np.sqrt(2*np.pi)*sigma_t)*np.exp(-0.5*np.power(dt/sigma_t,2))
+        # res_func = 1./(np.sqrt(2*np.pi)*sigma_t)*np.exp(-0.5*np.power(dt/sigma_t,2))
+        res_func = np.exp(-0.5*np.power(dt/sigma_t,2))
         ax.plot(dt,res_func,color='blue',linewidth=lw,label=label)
     else:
         line = np.linspace(0,10,pp)
         zero = np.zeros(pp)
         ax.plot(zero,line,color='blue',linewidth=lw,label=label)
     set_ax_labels(ax,r'$\Delta t$ [ps]',ytitle,title,xpos=[0.9, -0.070])
-    set_ax_lim(ax,[xmin,xmax],[0,10])
+    set_ax_lim(ax,[xmin,xmax],[0,1.1])
     # ax.set_ylim(bottom=0)
     legend = ax.legend(loc='upper right',fontsize=30,fancybox=True,title=leghead)
     plt.setp(legend.get_title(),fontsize=fl)
