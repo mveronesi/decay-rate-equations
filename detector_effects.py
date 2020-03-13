@@ -5,6 +5,13 @@ from decay_rate import B_f, Bbar_f, B_fbar, Bbar_fbar
 def eff_pow(t,a,n,b,beta,cutoff):
     return np.where((t<cutoff) | ((np.power((a*t),n)-b)<0),0,(1-1/(1+np.power((a*t),n)-b))*(1-beta*t))
 
+# Time Resolution
+def dil_res(sigma_t,dm):
+    if sigma_t>0:
+        return np.exp(-(sigma_t**2)*(dm**2)/2)
+    else:
+        return 1
+
 # Observed Decay Rates
 # dm,dg,gs - B mixing
 # r,delta,gamma,beta - CPV

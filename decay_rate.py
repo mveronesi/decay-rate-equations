@@ -28,6 +28,9 @@ def D_fbar(r,delta,gamma,beta):
 # dg - decay width difference
 # gs - decay width average
 # sigma_t - decay time resolution
+def exp_dec(t,gs):
+    return np.exp(-gs*t)
+
 def dec_rate(t,dm,dg,gs,D,C,S,sigma_t=0):
     if sigma_t>0:
         dil = np.exp(-(sigma_t**2)*(dm**2)/2)

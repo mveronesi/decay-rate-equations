@@ -6,6 +6,7 @@ from plot_acceptance import plot_acceptance
 from plot_resolution import plot_resolution
 from plot_tagging import plot_tagging
 from plot_asymmetries import plot_asymmetries
+from plot_coeffs import plot_coeffs
 
 # Widgets
 # decay rate
@@ -30,8 +31,17 @@ d_omega=widgets.BoundedFloatText(value=0, min=-0.5, max=0.5, step=0.001, continu
 eff=widgets.BoundedFloatText(value=0.8, min=0, max=1, step=0.01, continuous_update=False, description=r'$\varepsilon_{tag}$')
 d_eff=widgets.BoundedFloatText(value=0, min=-0.5, max=0.5, step=0.001, continuous_update=False, description=r'$\Delta\varepsilon_{tag}$')
 # asymmetries
-a_prod=widgets.BoundedFloatText(value=0, min=-1, max=1, step=0.01, continuous_update=False, description=r'$a_{prod}$')
-a_det=widgets.BoundedFloatText(value=0, min=-1, max=1, step=0.01, continuous_update=False, description=r'$a_{det}$')
+a_prod=widgets.BoundedFloatText(value=-0.01, min=-1, max=1, step=0.001, continuous_update=False, description=r'$a_{prod}$')
+a_det=widgets.BoundedFloatText(value=0.01, min=-1, max=1, step=0.001, continuous_update=False, description=r'$a_{det}$')
+# decay rate coefficients
+qt = widgets.RadioButtons(options=[+1,0,-1],value=+1,description=r'$q_t$',disabled=False)
+qf = widgets.RadioButtons(options=[+1,-1],value=+1,description=r'$q_f$',disabled=False)
+k_dec = widgets.Checkbox(value=True,description=r'Decay',disabled=False)
+k_acc= widgets.Checkbox(value=False,description=r'Acceptance',disabled=False)
+k_res= widgets.Checkbox(value=False,description=r'Resolution',disabled=False)
+k_tag= widgets.Checkbox(value=False,description=r'Tagging',disabled=False)
+k_prod= widgets.Checkbox(value=False,description=r'Production',disabled=False)
+k_det= widgets.Checkbox(value=False,description=r'Detection',disabled=False)
 # plotting
 ## dec_rate
 xmin_dec=widgets.BoundedFloatText(value=0, min=0, max=100, step=1, continuous_update=False, description=r'$t_{min}$ [ps$^{-1}$]')
@@ -70,6 +80,15 @@ y_untag_asymm=widgets.BoundedFloatText(value=0.2, min=0, max=10, step=0.1, conti
 y_mix_asymm=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{mix}$ [a.u.]')
 name_asymm=widgets.Text(value='plots/asymmetries.eps',continuous_update=False,description='Save as:')
 save_asymm=widgets.ToggleButton(value=False,description='Save')
+## decay rate coefficients
+xmin_coeffs=widgets.BoundedFloatText(value=0, min=0, max=20, step=1, continuous_update=False, description=r'$t_{min}$ [ps$^{-1}$]')
+xmax_coeffs=widgets.BoundedFloatText(value=5, min=0, max=20, step=1, continuous_update=False, description=r'$t_{max}$ [ps$^{-1}$]')
+y_cosh_coeffs=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{\cosh}$ [a.u.]')
+y_sinh_coeffs=widgets.BoundedFloatText(value=0.02, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{\sinh}$ [a.u.]')
+y_cos_coeffs=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{\cos}$ [a.u.]')
+y_sin_coeffs=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{\sin}$ [a.u.]')
+name_coeffs=widgets.Text(value='plots/coeffs.eps',continuous_update=False,description='Save as:')
+save_coeffs=widgets.ToggleButton(value=False,description='Save')
 
 # Interactive boxes
 ## Decay Rate
@@ -112,3 +131,21 @@ asymm_pars = interactive_output(plot_asymmetries,{'a_prod':a_prod,'a_det':a_det,
                                             'r':r,'delta':delta,'gamma':gamma,'beta':beta,
                                             'xmin':xmin_asymm,'xmax':xmax_asymm,'y_tag':y_tag_asymm,'y_untag':y_untag_asymm,'y_mix':y_mix_asymm,
                                             'name':name_asymm,'save':save_asymm})
+
+## Decay Rate Coefficients
+wbox_coeffs = HBox([VBox([qt,qf,k_dec,k_acc,k_res,k_tag,k_prod,k_det]),VBox([dm,dg,gs,r,delta,gamma,beta]),
+                    VBox([a_acc,n_acc,b_acc,beta_acc,cutoff_acc,sigma_t,omega,d_omega,eff,d_eff,a_prod,a_det]),
+                    VBox([xmin_coeffs,xmax_coeffs,y_cosh_coeffs,y_sinh_coeffs,y_cos_coeffs,y_sin_coeffs,name_coeffs,save_coeffs])])
+coeffs_pars = interactive_output(plot_coeffs,{'qt':qt,'qf':qf,
+                'dm':dm,'dg':dg,'gs':gs,'r':r,'delta':delta,'gamma':gamma,'beta':beta,
+                'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
+                'sigma_t':sigma_t,'omega_tag':omega,'d_omega_tag':d_omega,'eff_tag':eff,'d_eff_tag':d_eff,
+                'a_prod_asym':a_prod,'a_det_asym':a_det,
+                'xmin':xmin_coeffs,'xmax':xmax_coeffs,'y_cosh':y_cosh_coeffs,'y_sinh':y_sinh_coeffs,'y_cos':y_cos_coeffs,'y_sin':y_sin_coeffs,
+                'name':name_coeffs,'save':save_coeffs,
+                'k_dec':k_dec,
+                'k_acc':k_acc,
+                'k_res':k_res,
+                'k_tag':k_tag,
+                'k_prod':k_prod,
+                'k_det':k_det})

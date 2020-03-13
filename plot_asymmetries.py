@@ -34,7 +34,7 @@ def plot_asymmetries(a_prod,a_det,
     plot_osc(ax1,t,B_f_obs_t,Bbar_f_obs_t,B_fbar_obs_t,Bbar_fbar_obs_t,xmin,xmax,ymax=y_tag,title='Tagged Decay Rate',leghead=bmix_leg(dm,dg,gs))
     Untag_f_t = Untagged_f_obs(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad,a_acc,n_acc,b_acc,beta_acc,cutoff_acc,sigma_t,omega_b,omega_bar,eff_b,eff_bar,a_prod,a_det)
     Untag_fbar_t = Untagged_fbar_obs(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad,a_acc,n_acc,b_acc,beta_acc,cutoff_acc,sigma_t,omega_b,omega_bar,eff_b,eff_bar,a_prod,a_det)
-    plot_untag(ax2,t,Untag_f_t,Untag_fbar_t,xmin,xmax,ymax=y_untag,title='Untagged Decay Rate',leghead=asymm_leg(a_det,a_prod))
+    plot_untag(ax2,t,Untag_f_t,Untag_fbar_t,xmin,xmax,ymax=y_untag,title='Untagged Decay Rate',leghead=asymm_leg(a_prod,a_det))
     # Mixing Asymmetry
     xmin_mix = max(np.power(b_acc,1./n_acc)/a_acc,cutoff_acc)
     t_fold = fold_times(xmin_mix,xmax,dm)

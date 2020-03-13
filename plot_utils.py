@@ -33,6 +33,27 @@ def cpv_leg(r,delta,gamma,beta):
     leg += r'$\beta_{s}$ = '+'{:.0f}'.format(beta) + r' mrad'
     return leg
 
+def C_f_leg(r):
+    C_f_val = C_f(r)
+    C_fbar_val = C_fbar(r)
+    leg = r'$C_f$ = '+'{:.2f}'.format(C_f_val) + '\n'
+    leg += r'$C_{\overline{f}}$ = '+'{:.2f}'.format(C_fbar_val)
+    return leg
+
+def S_f_leg(r,delta,gamma,beta):
+    S_f_val = S_f(r,delta,gamma,beta)
+    S_fbar_val = S_fbar(r,delta,gamma,beta)
+    leg = r'$S_f$ = '+'{:.2f}'.format(S_f_val) + '\n'
+    leg += r'$S_{\overline{f}}$ = '+'{:.2f}'.format(S_fbar_val)
+    return leg
+
+def D_f_leg(r,delta,gamma,beta):
+    D_f_val = D_f(r,delta,gamma,beta)
+    D_fbar_val = D_fbar(r,delta,gamma,beta)
+    leg = r'$D_f$ = '+'{:.2f}'.format(D_f_val) + '\n'
+    leg += r'$D_{\overline{f}}$ = '+'{:.2f}'.format(D_fbar_val)
+    return leg
+
 def acc_leg(a,n,b,beta,cut):
     leg = r'$a$ = '+'{:.1f}'.format(a) + '\n'
     leg += r'$n$ = '+'{:.1f}'.format(n) + '\n'
@@ -53,8 +74,8 @@ def tag_leg(omega,d_omega,eff,d_eff):
     return leg
 
 def asymm_leg(a_prod,a_det):
-    leg = r'$a_{prod}$ = ' + '{:.2f}'.format(a_prod) + '\n'
-    leg += r'$a_{det}$ = ' + '{:.2f}'.format(a_det)
+    leg = r'$a_{prod}$ = ' + '{:.3f}'.format(a_prod) + '\n'
+    leg += r'$a_{det}$ = ' + '{:.3f}'.format(a_det)
     return leg
 
 # plot axes
@@ -75,6 +96,14 @@ def angles(xmin,xmax,slope):
     xcoo = np.linspace(xmin,xmax,pp)
     ycoo = slope*xcoo
     return [xcoo,ycoo]
+
+# Tringonometric Functions Effective Coefficients
+def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ytitle='P(t)',col='blue',style='-',label='',title='Coeff',leghead=''):
+    ax.plot(t,func,color=col,linewidth=lw,label=label,linestyle=style)
+    set_ax_labels(ax,'t [ps]',ytitle,title,ypos=[-0.1, 0.8])
+    set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
+    legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
+    plt.setp(legend.get_title(),fontsize=40)
 
 # Oscillation Plot
 def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=2,title='Decay Rate',leghead=''):
