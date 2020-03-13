@@ -98,9 +98,9 @@ def angles(xmin,xmax,slope):
     return [xcoo,ycoo]
 
 # Tringonometric Functions Effective Coefficients
-def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ytitle='P(t)',col='blue',style='-',label='',title='Coeff',leghead=''):
+def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ypos=[-0.1, 0.8],ytitle='P(t)',col='blue',style='-',label='',title='Coeff',leghead=''):
     ax.plot(t,func,color=col,linewidth=lw,label=label,linestyle=style)
-    set_ax_labels(ax,'t [ps]',ytitle,title,ypos=[-0.1, 0.8])
+    set_ax_labels(ax,'t [ps]',ytitle,title,ypos=ypos)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
     plt.setp(legend.get_title(),fontsize=40)
