@@ -45,9 +45,9 @@ def plot_coeffs(qt_plus,qt_nul,qt_min,qf_plus,qf_min,
     cos_t = np.cos(0.5*dm*t)
     sin_t = np.sin(0.5*dm*t)
     # labels
-    title_sinh = r'$(D_f,D_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(D_f(r,delta,gamma,beta),D_fbar(r,delta,gamma,beta))
+    title_sinh = r'$(D_f,D_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(D_f(r,delta_rad,gamma_rad,beta_rad),D_fbar(r,delta_rad,gamma_rad,beta_rad))
     title_cos = r'$(C_f,C_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(C_f(r),C_fbar(r))
-    title_sin = r'$(S_f,S_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(S_f(r,delta,gamma,beta),S_fbar(r,delta,gamma,beta))
+    title_sin = r'$(S_f,S_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(S_f(r,delta_rad,gamma_rad,beta_rad),S_fbar(r,delta_rad,gamma_rad,beta_rad))
     title_cpv = r'$r$ = '+'{:.1f}'.format(r)
     title_cpv += r', $\delta$ = '+'{:.0f}'.format(delta) + r'$^{\circ}$'
     title_cpv += r', $\gamma$ = '+'{:.0f}'.format(gamma) + r'$^{\circ}$'
