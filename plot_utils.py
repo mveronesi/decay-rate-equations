@@ -76,7 +76,7 @@ def asymm_leg(a_prod,a_det):
     return leg
 
 # plot axes
-def set_ax_labels(ax,xtitle,ytitle,title,xpos=[0.95, -0.070],ypos=[-0.08, 0.9]):
+def set_ax_labels(ax,xtitle,ytitle,title,xpos=[0.95, -0.070],ypos=[-0.08, 0.9],fs=fs):
     ax.set_xlabel(xtitle,fontsize = fs)
     ax.set_ylabel(ytitle,fontsize = fs)
     ax.tick_params(labelsize = fs)
@@ -104,10 +104,10 @@ def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ypos=[-0.1, 0.8],ytitle='P(t
 
 # Oscillation Plot
 def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=2,title='Decay Rate',leghead=''):
-    ax.plot(t,B_f_t,color='blue',linewidth=lw,label=r'$B\to f$')
-    ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\overline{B}\to f$')
-    ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\overline{B}\to \overline{f}$')
-    ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \overline{f}$')
+    if isinstance(B_f_t!=False,np.ndarray): ax.plot(t,B_f_t,color='blue',linewidth=lw,label=r'$B\to f$')
+    if isinstance(Bbar_f_t,np.ndarray): ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\overline{B}\to f$')
+    if isinstance(Bbar_fbar_t,np.ndarray): ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\overline{B}\to \overline{f}$')
+    if isinstance(B_fbar_t,np.ndarray): ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \overline{f}$')
     set_ax_labels(ax,'t [ps]',r'$d\Gamma/dt$',title)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
@@ -201,9 +201,10 @@ def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
                 color='brown',linewidth=lw)
     ax.plot([-A_f_val],[-S_f_val],marker='o',color='green',markersize=15,linewidth=0,label=r'$(-A_f^{\Delta\Gamma},-S_f)$')
     ax.plot([-A_fbar_val],[-S_fbar_val],marker='o',color='brown',markersize=15,linewidth=0,label=r'$(-A_{\overline{f}}^{\Delta\Gamma},-S_{\overline{f}})$')
-    legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True)
+    legend = ax.legend(loc='lower left',fontsize=30,fancybox=True)
     set_ax_lim(ax,[-1,1],[-1,1])
     set_ax_labels(ax,r'$2r/(1+r^2)\cos((\gamma-2\beta_s) \pm \delta)$',
                      r'$2r/(1+r^2)\sin((\gamma-2\beta_s) \pm \delta)$',
                      r'Constraints on $\gamma$',
-                     xpos=[0.7, -0.070],ypos=[-0.08, 0.7])
+                     xpos=[0.65, -0.070],ypos=[-0.08, 0.65],
+                     fs=35)
