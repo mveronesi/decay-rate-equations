@@ -25,11 +25,14 @@ beta_acc=widgets.BoundedFloatText(value=0.03, min=0, max=0.1, step=0.001, contin
 cutoff_acc=widgets.BoundedFloatText(value=0.2, min=0, max=20, step=0.01, continuous_update=False, description=r'$t_{cut}$ [ps]')
 # resolution
 sigma_t=widgets.BoundedFloatText(value=0.045, min=0, max=1, step=0.001, continuous_update=False, description=r'$\sigma_{t}$ [ps]')
+k_acc_res= widgets.Checkbox(value=True,description=r'Acceptance',disabled=False)
 # tagging
 omega=widgets.BoundedFloatText(value=0.35, min=0, max=0.5, step=0.01, continuous_update=False, description=r'$\omega_{tag}$')
 d_omega=widgets.BoundedFloatText(value=0, min=-0.5, max=0.5, step=0.001, continuous_update=False, description=r'$\Delta\omega_{tag}$')
 eff=widgets.BoundedFloatText(value=0.8, min=0, max=1, step=0.01, continuous_update=False, description=r'$\varepsilon_{tag}$')
 d_eff=widgets.BoundedFloatText(value=0, min=-0.5, max=0.5, step=0.001, continuous_update=False, description=r'$\Delta\varepsilon_{tag}$')
+k_acc_tag= widgets.Checkbox(value=True,description=r'Acceptance',disabled=False)
+k_res_tag= widgets.Checkbox(value=True,description=r'Resolution',disabled=False)
 # asymmetries
 a_prod=widgets.BoundedFloatText(value=-0.01, min=-1, max=1, step=0.001, continuous_update=False, description=r'$a_{prod}$')
 a_det=widgets.BoundedFloatText(value=0.01, min=-1, max=1, step=0.001, continuous_update=False, description=r'$a_{det}$')
@@ -111,21 +114,23 @@ acc_pars = interactive_output(plot_acceptance,{'a_acc':a_acc,'n_acc':n_acc,'b_ac
                                                 'xmin':xmin_acc,'xmax':xmax_acc,'y_osc':y_osc_acc,'y_mix':y_mix_acc,
                                                 'name':name_acc,'save':save_acc})
 ## Decay Time Resolution
-wbox_res = HBox([VBox([sigma_t]),VBox([xmin_res,xmax_res,y_osc_res,y_mix_res]),VBox([name_res]),VBox([save_res])])
+wbox_res = HBox([VBox([sigma_t,k_acc_res]),VBox([xmin_res,xmax_res,y_osc_res,y_mix_res]),VBox([name_res]),VBox([save_res])])
 res_pars = interactive_output(plot_resolution,{'sigma_t':sigma_t,
                                                 'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                                 'dm':dm,'dg':dg,'gs':gs,
                                                 'r':r,'delta':delta,'gamma':gamma,'beta':beta,
                                                 'xmin':xmin_res,'xmax':xmax_res,'y_osc':y_osc_res,'y_mix':y_mix_res,
+                                                'k_acc':k_acc_res,
                                                 'name':name_res,'save':save_res})
 ## Flavoure Tagging
-wbox_tag = HBox([VBox([omega,d_omega,eff,d_eff]),VBox([xmin_tag,xmax_tag,y_tag,y_untag,y_mix_tag]),VBox([name_tag]),VBox([save_tag])])
+wbox_tag = HBox([VBox([omega,d_omega,eff,d_eff,k_acc_tag,k_res_tag]),VBox([xmin_tag,xmax_tag,y_tag,y_untag,y_mix_tag]),VBox([name_tag]),VBox([save_tag])])
 tag_pars = interactive_output(plot_tagging,{'omega':omega,'d_omega':d_omega,'eff':eff,'d_eff':d_eff,
                                             'sigma_t':sigma_t,
                                             'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                             'dm':dm,'dg':dg,'gs':gs,
                                             'r':r,'delta':delta,'gamma':gamma,'beta':beta,
                                             'xmin':xmin_tag,'xmax':xmax_tag,'y_tag':y_tag,'y_untag':y_untag,'y_mix':y_mix_tag,
+                                            'k_acc':k_acc_tag,'k_res':k_res_tag,
                                             'name':name_tag,'save':save_tag})
 ## Asymmetries
 wbox_asymm = HBox([VBox([a_prod,a_det]),VBox([xmin_asymm,xmax_asymm,y_tag_asymm,y_untag_asymm,y_mix_asymm]),VBox([name_asymm]),VBox([save_asymm])])

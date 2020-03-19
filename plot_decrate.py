@@ -1,14 +1,13 @@
-import decay_rate
-from decay_rate import C_f, C_fbar, S_f, S_fbar, D_f, D_fbar
-from decay_rate import B_f, B_fbar, Bbar_f, Bbar_fbar
-from decay_rate import Amix_f, Amix_fbar
-import plot_utils
-from plot_utils import plot_osc, plot_amix, plot_gamma, fold_times, pp
-from decay_rate import Amix_f_fold, Amix_fbar_fold
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import decay_rate_compact
+from decay_rate_compact import P_t, Amix_qf, Afold_qf
+from decay_rate_compact import C_qf, S_qf, A_qf
+import plot_utils
+from plot_utils import plot_osc, plot_amix, plot_gamma, fold_times, pp
+
 
 # Theoretical Decay Rate
 # delta - degrees
@@ -25,33 +24,33 @@ def plot_decrate(dm,dg,gs,r=0,delta=0,gamma=0,beta=0,
     gamma_rad = gamma*np.pi/180
     beta_rad = beta/1000
     # CP coefficients
-    C_f_val = C_f(r)
-    C_fbar_val = C_fbar(r)
-    D_f_val = D_f(r,delta_rad,gamma_rad,beta_rad)
-    D_fbar_val = D_fbar(r,delta_rad,gamma_rad,beta_rad)
-    S_f_val = S_f(r,delta_rad,gamma_rad,beta_rad)
-    S_fbar_val = S_fbar(r,delta_rad,gamma_rad,beta_rad)
+    C_f_val = C_qf(r,+1)
+    C_fbar_val = C_qf(r,-1)
+    A_f_val = A_qf(r,delta_rad,gamma_rad,beta_rad,+1)
+    A_fbar_val = A_qf(r,delta_rad,gamma_rad,beta_rad,-1)
+    S_f_val = S_qf(r,delta_rad,gamma_rad,beta_rad,+1)
+    S_fbar_val = S_qf(r,delta_rad,gamma_rad,beta_rad,-1)
     # Decay Rate Equations
     t = np.linspace(xmin,xmax,pp)
-    B_f_t = B_f(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
-    Bbar_f_t = Bbar_f(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
-    B_fbar_t = B_fbar(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
-    Bbar_fbar_t = Bbar_fbar(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
+    B_f_t = P_t(t=t,qt=1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
+    Bbar_f_t = P_t(t=t,qt=-1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
+    B_fbar_t = P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
+    Bbar_fbar_t = P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
     plot_osc(ax1,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin,xmax,ymax=y_osc)
     # Mixing Asymmetries
-    Amix_f_t = Amix_f(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
-    Amix_fbar_t = Amix_fbar(t,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
+    Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
+    Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
     plot_amix(ax3,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-y_mix,ymax=y_mix)
     t_fold = fold_times(xmin,xmax,dm)
     if len(t_fold)>1:
-        Amix_f_t_fold = Amix_f_fold(t_fold,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
-        Amix_fbar_t_fold = Amix_fbar_fold(t_fold,dm,dg,gs,r,delta_rad,gamma_rad,beta_rad)
+        Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
+        Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad)
         t_osc = np.linspace(0,2*np.pi/dm,pp)
         plot_amix(ax4,t_osc,Amix_f_t_fold,Amix_fbar_t_fold,0,2*np.pi/dm,
                   title='Folded Asymmetries',xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
                   xtitle_pos=[0.77,-0.07],ymin=-y_mix,ymax=y_mix)
     # Constraints on Gamma
-    plot_gamma(ax2,r,delta_rad,gamma_rad,D_f_val,S_f_val,D_fbar_val,S_fbar_val)
+    plot_gamma(ax2,r,delta_rad,gamma_rad,A_f_val,S_f_val,A_fbar_val,S_fbar_val)
 
     # Plot
     fig.tight_layout()

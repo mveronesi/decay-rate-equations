@@ -17,10 +17,10 @@ def S_f(r,delta,gamma,beta):
 def S_fbar(r,delta,gamma,beta):
     return -2*r*np.sin(delta+(gamma-2*beta))/(1+r**2)
 
-def D_f(r,delta,gamma,beta):
+def A_f(r,delta,gamma,beta):
     return -2*r*np.cos(delta-(gamma-2*beta))/(1+r**2)
 
-def D_fbar(r,delta,gamma,beta):
+def A_fbar(r,delta,gamma,beta):
     return -2*r*np.cos(delta+(gamma-2*beta))/(1+r**2)
 
 # Decay Rate Equations
@@ -41,26 +41,26 @@ def dec_rate(t,dm,dg,gs,D,C,S,sigma_t=0):
 def B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t=0):
     C_f_val = C_f(r)
     S_f_val = S_f(r,delta,gamma,beta)
-    D_f_val = D_f(r,delta,gamma,beta)
-    return dec_rate(t,dm,dg,gs,D_f_val,C_f_val,-S_f_val,sigma_t=sigma_t)
+    A_f_val = A_f(r,delta,gamma,beta)
+    return dec_rate(t,dm,dg,gs,A_f_val,C_f_val,-S_f_val,sigma_t=sigma_t)
 
 def Bbar_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t=0):
     C_f_val = C_f(r)
     S_f_val = S_f(r,delta,gamma,beta)
-    D_f_val = D_f(r,delta,gamma,beta)
-    return dec_rate(t,dm,dg,gs,D_f_val,-C_f_val,S_f_val,sigma_t=sigma_t)
+    A_f_val = A_f(r,delta,gamma,beta)
+    return dec_rate(t,dm,dg,gs,A_f_val,-C_f_val,S_f_val,sigma_t=sigma_t)
 
 def B_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t=0):
     C_fbar_val = C_fbar(r)
     S_fbar_val = S_fbar(r,delta,gamma,beta)
-    D_fbar_val = D_fbar(r,delta,gamma,beta)
-    return dec_rate(t,dm,dg,gs,D_fbar_val,C_fbar_val,-S_fbar_val,sigma_t=sigma_t)
+    A_fbar_val = A_fbar(r,delta,gamma,beta)
+    return dec_rate(t,dm,dg,gs,A_fbar_val,C_fbar_val,-S_fbar_val,sigma_t=sigma_t)
 
 def Bbar_fbar(t,dm,dg,gs,r,delta,gamma,beta,sigma_t=0):
     C_fbar_val = C_fbar(r)
     S_fbar_val = S_fbar(r,delta,gamma,beta)
-    D_fbar_val = D_fbar(r,delta,gamma,beta)
-    return dec_rate(t,dm,dg,gs,D_fbar_val,-C_fbar_val,S_fbar_val,sigma_t=sigma_t)
+    A_fbar_val = A_fbar(r,delta,gamma,beta)
+    return dec_rate(t,dm,dg,gs,A_fbar_val,-C_fbar_val,S_fbar_val,sigma_t=sigma_t)
 
 # Mixing Asymmetries
 def Amix_f(t,dm,dg,gs,r,delta,gamma,beta):

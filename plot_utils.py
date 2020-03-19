@@ -8,11 +8,8 @@ plt.style.use(hep.style.ATLAS)
 plt.rc('font',**{'family':'serif','serif':['Times']})
 plt.rc('text', usetex=True)
 
-import decay_rate
-from decay_rate import C_f, C_fbar, S_f, S_fbar, D_f, D_fbar
-from decay_rate import B_f, B_fbar, Bbar_f, Bbar_fbar
-from decay_rate import Amix_f, Amix_fbar
-from detector_effects import eff_pow
+import decay_rate_compact
+from decay_rate_compact import C_qf, S_qf, A_qf
 
 lw = 2 # line width
 fs = 40 # font size
@@ -34,24 +31,24 @@ def cpv_leg(r,delta,gamma,beta):
     return leg
 
 def C_f_leg(r):
-    C_f_val = C_f(r)
-    C_fbar_val = C_fbar(r)
+    C_f_val = C_qf(r,+1)
+    C_fbar_val = C_qf(r,-1)
     leg = r'$C_f$ = '+'{:.2f}'.format(C_f_val) + '\n'
     leg += r'$C_{\overline{f}}$ = '+'{:.2f}'.format(C_fbar_val)
     return leg
 
 def S_f_leg(r,delta,gamma,beta):
-    S_f_val = S_f(r,delta,gamma,beta)
-    S_fbar_val = S_fbar(r,delta,gamma,beta)
+    S_f_val = S_qf(r,delta,gamma,beta,+1)
+    S_fbar_val = S_qf(r,delta,gamma,beta,-1)
     leg = r'$S_f$ = '+'{:.2f}'.format(S_f_val) + '\n'
     leg += r'$S_{\overline{f}}$ = '+'{:.2f}'.format(S_fbar_val)
     return leg
 
-def D_f_leg(r,delta,gamma,beta):
-    D_f_val = D_f(r,delta,gamma,beta)
-    D_fbar_val = D_fbar(r,delta,gamma,beta)
-    leg = r'$D_f$ = '+'{:.2f}'.format(D_f_val) + '\n'
-    leg += r'$D_{\overline{f}}$ = '+'{:.2f}'.format(D_fbar_val)
+def A_f_leg(r,delta,gamma,beta):
+    A_f_val = A_qf(r,delta,gamma,beta,+1)
+    A_fbar_val = A_qf(r,delta,gamma,beta,-1)
+    leg = r'$A_f^{\Delta\Gamma}$ = '+'{:.2f}'.format(A_f_val) + '\n'
+    leg += r'$A^{\Delta\Gamma}_{\overline{f}}$ = '+'{:.2f}'.format(A_fbar_val)
     return leg
 
 def acc_leg(a,n,b,beta,cut):
@@ -108,9 +105,9 @@ def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ypos=[-0.1, 0.8],ytitle='P(t
 # Oscillation Plot
 def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=2,title='Decay Rate',leghead=''):
     ax.plot(t,B_f_t,color='blue',linewidth=lw,label=r'$B\to f$')
-    ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\bar{B}\to f$')
-    ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\bar{B}\to \bar{f}$')
-    ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \bar{f}$')
+    ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\overline{B}\to f$')
+    ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\overline{B}\to \overline{f}$')
+    ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \overline{f}$')
     set_ax_labels(ax,'t [ps]',r'$d\Gamma/dt$',title)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
@@ -157,7 +154,7 @@ def plot_amix(ax,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-1,ymax=1,
               title='Mixing Asymmetries',xtitle='t [ps]',xtitle_pos = [0.95, -0.070],
               leghead=''):
     ax.plot(t,Amix_f_t,linewidth=lw,color='black',label=r'$f$')
-    ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=r'$\bar{f}$')
+    ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=r'$\overline{f}$')
     set_ax_labels(ax,xtitle,r'$A_{\mathrm{mix}}$',title,xtitle_pos)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True,title=leghead)
@@ -176,7 +173,7 @@ def fold_times(xmin,xmax,dm):
         return [0]
 
 # Constraints On Gamma
-def plot_gamma(ax,r,delta,gamma,D_f_val,S_f_val,D_fbar_val,S_fbar_val):
+def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
     line = np.linspace(-1,1,pp)
     zero = np.zeros(pp)
     ax.plot(zero,line,color='black')
@@ -194,16 +191,16 @@ def plot_gamma(ax,r,delta,gamma,D_f_val,S_f_val,D_fbar_val,S_fbar_val):
             angles(0 if (delta<=np.pi/2 or delta>3*np.pi/2) else -1,1 if (delta<=np.pi/2 or delta>3*np.pi/2) else 0,np.tan(delta))[1],
             color='blue',label=r'$\delta$',linewidth=lw)
     ## CP Parameters
-    if D_f_val!=0:
-        ax.plot(angles(0 if -D_f_val>0 else -D_f_val,-D_f_val if -D_f_val>0 else 0,S_f_val/D_f_val)[0],
-                angles(0 if -D_f_val>0 else -D_f_val,-D_f_val if -D_f_val>0 else 0,S_f_val/D_f_val)[1],
+    if A_f_val!=0:
+        ax.plot(angles(0 if -A_f_val>0 else -A_f_val,-A_f_val if -A_f_val>0 else 0,S_f_val/A_f_val)[0],
+                angles(0 if -A_f_val>0 else -A_f_val,-A_f_val if -A_f_val>0 else 0,S_f_val/A_f_val)[1],
                 color='green',linewidth=lw)
-    if D_fbar_val!=0:
-        ax.plot(angles(0 if -D_fbar_val>0 else -D_fbar_val,-D_fbar_val if -D_fbar_val>0 else 0,S_fbar_val/D_fbar_val)[0],
-                angles(0 if -D_fbar_val>0 else -D_fbar_val,-D_fbar_val if -D_fbar_val>0 else 0,S_fbar_val/D_fbar_val)[1],
+    if A_fbar_val!=0:
+        ax.plot(angles(0 if -A_fbar_val>0 else -A_fbar_val,-A_fbar_val if -A_fbar_val>0 else 0,S_fbar_val/A_fbar_val)[0],
+                angles(0 if -A_fbar_val>0 else -A_fbar_val,-A_fbar_val if -A_fbar_val>0 else 0,S_fbar_val/A_fbar_val)[1],
                 color='brown',linewidth=lw)
-    ax.plot([-D_f_val],[-S_f_val],marker='o',color='green',markersize=15,linewidth=0,label=r'$(-D_f,-S_f)$')
-    ax.plot([-D_fbar_val],[-S_fbar_val],marker='o',color='brown',markersize=15,linewidth=0,label=r'$(-D_{\bar{f}},-S_{\bar{f}})$')
+    ax.plot([-A_f_val],[-S_f_val],marker='o',color='green',markersize=15,linewidth=0,label=r'$(-A_f^{\Delta\Gamma},-S_f)$')
+    ax.plot([-A_fbar_val],[-S_fbar_val],marker='o',color='brown',markersize=15,linewidth=0,label=r'$(-A_{\overline{f}}^{\Delta\Gamma},-S_{\overline{f}})$')
     legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True)
     set_ax_lim(ax,[-1,1],[-1,1])
     set_ax_labels(ax,r'$2r/(1+r^2)\cos((\gamma-2\beta_s) \pm \delta)$',
