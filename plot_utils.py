@@ -201,7 +201,7 @@ def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
                 color='brown',linewidth=lw)
     ax.plot([-A_f_val],[-S_f_val],marker='o',color='green',markersize=15,linewidth=0,label=r'$(-A_f^{\Delta\Gamma},-S_f)$')
     ax.plot([-A_fbar_val],[-S_fbar_val],marker='o',color='brown',markersize=15,linewidth=0,label=r'$(-A_{\overline{f}}^{\Delta\Gamma},-S_{\overline{f}})$')
-    legend = ax.legend(loc='lower left',fontsize=30,fancybox=True)
+    legend = ax.legend(loc='lower left',fontsize=28,fancybox=True)
     set_ax_lim(ax,[-1,1],[-1,1])
     set_ax_labels(ax,r'$2r/(1+r^2)\cos((\gamma-2\beta_s) \pm \delta)$',
                      r'$2r/(1+r^2)\sin((\gamma-2\beta_s) \pm \delta)$',
