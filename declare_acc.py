@@ -18,7 +18,9 @@ name=widgets.Text(value='plots/acceptance.eps',continuous_update=False)
 save=widgets.ToggleButton(value=False,description='Save')
 fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=False)
 ## Decay Time Acceptance
-wbox_acc = HBox([VBox([a_acc,n_acc,b_acc,beta_acc,cutoff_acc]),VBox([xmin,xmax,y_osc,y_mix,fold_amix]),VBox([name,save])])
+wbox_acc = HBox([VBox([a_acc,n_acc,b_acc,beta_acc,cutoff_acc]),
+                 VBox([xmin,xmax,y_osc,y_mix,fold_amix]),
+                 VBox([name,save])])
 acc_pars = interactive_output(plot_acceptance,{'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                                 'dm':dm,'dg':dg,'gs':gs,
                                                 'r':r,'delta':delta,'gamma':gamma,'beta':beta,

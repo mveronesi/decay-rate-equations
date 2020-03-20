@@ -104,7 +104,7 @@ def plot_func(ax,t,func,xmin=0,xmax=5,ymin=0,ymax=2,ypos=[-0.1, 0.8],ytitle='P(t
 
 # Oscillation Plot
 def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=2,title='Decay Rate',leghead=''):
-    if isinstance(B_f_t!=False,np.ndarray): ax.plot(t,B_f_t,color='blue',linewidth=lw,label=r'$B\to f$')
+    if isinstance(B_f_t,np.ndarray): ax.plot(t,B_f_t,color='blue',linewidth=lw,label=r'$B\to f$')
     if isinstance(Bbar_f_t,np.ndarray): ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\overline{B}\to f$')
     if isinstance(Bbar_fbar_t,np.ndarray): ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\overline{B}\to \overline{f}$')
     if isinstance(B_fbar_t,np.ndarray): ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \overline{f}$')
@@ -114,8 +114,8 @@ def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=
     plt.setp(legend.get_title(),fontsize=fl)
 
 def plot_untag(ax,t,Untag_f_t,Untag_fbar_t,xmin=0,xmax=5,ymin=0,ymax=2,title='Decay Rate',leghead=''):
-    ax.plot(t,Untag_f_t,color='black',linewidth=lw,label=r'$f$')
-    ax.plot(t,Untag_fbar_t,color='red',linestyle='--',linewidth=lw,label=r'$\overline{f}$')
+    if isinstance(Untag_f_t,np.ndarray): ax.plot(t,Untag_f_t,color='black',linewidth=lw,label=r'$f$')
+    if isinstance(Untag_fbar_t,np.ndarray): ax.plot(t,Untag_fbar_t,color='red',linestyle='--',linewidth=lw,label=r'$\overline{f}$')
     set_ax_labels(ax,'t [ps]',r'$d\Gamma/dt$',title)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
@@ -153,8 +153,8 @@ def plot_res(ax,sigma_t,xmin=-0.35,xmax=0.35,title='Time Resolution',ytitle='',l
 def plot_amix(ax,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-1,ymax=1,
               title='Mixing Asymmetries',xtitle='t [ps]',xtitle_pos = [0.95, -0.070],
               leghead=''):
-    ax.plot(t,Amix_f_t,linewidth=lw,color='black',label=r'$f$')
-    ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=r'$\overline{f}$')
+    if isinstance(Amix_f_t,np.ndarray): ax.plot(t,Amix_f_t,linewidth=lw,color='black',label=r'$f$')
+    if isinstance(Amix_fbar_t,np.ndarray): ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=r'$\overline{f}$')
     set_ax_labels(ax,xtitle,r'$A_{\mathrm{mix}}$',title,xtitle_pos)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True,title=leghead)

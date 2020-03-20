@@ -23,9 +23,10 @@ fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=F
 k_acc= widgets.Checkbox(value=True,description=r'Acceptance',disabled=False)
 
 ## Decay Time Resolution
-wbox_res = HBox([VBox([sigma_t,k_acc,fold_amix]),VBox([xmin,xmax,y_osc,y_mix]),
+wbox_res = HBox([VBox([sigma_t]),VBox([xmin,xmax,y_osc,y_mix]),
+                 VBox([k_acc,fold_amix]),
                  VBox([qt_plus,qt_min,qf_plus,qf_min]),
-                 VBox([name]),VBox([save])])
+                 VBox([name,save])])
 res_pars = interactive_output(plot_resolution,{'sigma_t':sigma_t,
                                                 'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                                 'dm':dm,'dg':dg,'gs':gs,

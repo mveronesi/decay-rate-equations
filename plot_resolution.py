@@ -27,30 +27,25 @@ def plot_resolution(sigma_t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc,
     # Decay Rate Equations
     t = np.linspace(xmin,xmax,pp)
     eff_acc = eff_pow(t,a_acc,n_acc,b_acc,beta_acc,cutoff_acc) if k_acc else 1
-    B_f_obs_t = eff_acc*P_t(t=t,qt=1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-    Bbar_f_obs_t = eff_acc*P_t(t=t,qt=-1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-    B_fbar_obs_t = eff_acc*P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-    Bbar_fbar_obs_t = eff_acc*P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-    # plotting options
-    plot_B_f_t = B_f_obs_t if (qt_plus and qf_plus) else False
-    plot_Bbar_f_t = Bbar_f_obs_t if (qt_min and qf_plus) else False
-    plot_B_fbar_t = B_fbar_obs_t if (qt_plus and qf_min) else False
-    plot_Bbar_fbar_t = Bbar_fbar_obs_t if (qt_min and qf_min) else False
-    plot_osc(ax1,t,plot_B_f_t,plot_Bbar_f_t,plot_B_fbar_t,plot_Bbar_fbar_t,xmin,xmax,ymax=y_osc)
+    B_f_t = eff_acc*P_t(t=t,qt=1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if (qt_plus and qf_plus) else False
+    Bbar_f_t = eff_acc*P_t(t=t,qt=-1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if (qt_min and qf_plus) else False
+    B_fbar_t = eff_acc*P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if (qt_plus and qf_min) else False
+    Bbar_fbar_t = eff_acc*P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if (qt_min and qf_min) else False
+    plot_osc(ax1,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin,xmax,ymax=y_osc)
     plot_res(ax2,sigma_t,leghead=res_leg(sigma_t))
     # Mixing Asymmetry
     xmin_mix = max(np.power(b_acc,1./n_acc)/a_acc,cutoff_acc)
     t_fold = fold_times(xmin_mix,xmax,dm)
     if fold_amix and (len(t_fold)>1):
-        Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-        Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
+        Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if qf_plus else False
+        Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if qf_min else False
         t_osc = np.linspace(0,2*np.pi/dm,pp)
         plot_amix(ax3,t_osc,Amix_f_t_fold,Amix_fbar_t_fold,0,2*np.pi/dm,
                   title='Folded Asymmetries',xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
                   xtitle_pos=[0.7,-0.07],ymin=-y_mix,ymax=y_mix)
     else:
-        Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
-        Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t)
+        Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if qf_plus else False
+        Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t) if qf_min else False
         plot_amix(ax3,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-y_mix,ymax=y_mix)
     # Plot
     fig.tight_layout()
