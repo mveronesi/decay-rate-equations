@@ -15,17 +15,17 @@ y_mix=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_upda
 name=widgets.Text(value='plots/resolution.eps',continuous_update=False)
 save=widgets.ToggleButton(value=False,description='Save')
 # select
-qt_plus = widgets.Checkbox(value=True,description=r'$q_t$=+1',disabled=False)
-qt_min = widgets.Checkbox(value=True,description=r'$q_t$=-1',disabled=False)
-qf_plus = widgets.Checkbox(value=True,description=r'$q_f$=+1',disabled=False)
-qf_min = widgets.Checkbox(value=True,description=r'$q_f$=-1',disabled=False)
+b_f = widgets.Checkbox(value=True,description=r'$B$$\to$$f$',disabled=False)
+bbar_f = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$f$',disabled=False)
+bbar_fbar = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$\overline{f}$',disabled=False)
+b_fbar = widgets.Checkbox(value=True,description=r'$B$$\to$$\overline{f}$',disabled=False)
 fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=False)
 k_acc= widgets.Checkbox(value=True,description=r'Acceptance',disabled=False)
 
 ## Decay Time Resolution
 wbox_res = HBox([VBox([sigma_t]),VBox([xmin,xmax,y_osc,y_mix]),
                  VBox([k_acc,fold_amix]),
-                 VBox([qt_plus,qt_min,qf_plus,qf_min]),
+                 VBox([b_f,bbar_f,bbar_fbar,b_fbar]),
                  VBox([name,save])])
 res_pars = interactive_output(plot_resolution,{'sigma_t':sigma_t,
                                                 'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
@@ -34,8 +34,8 @@ res_pars = interactive_output(plot_resolution,{'sigma_t':sigma_t,
                                                 'xmin':xmin,'xmax':xmax,'y_osc':y_osc,'y_mix':y_mix,
                                                 'k_acc':k_acc,
                                                 'name':name,'save':save,
-                                                'qt_plus':qt_plus,
-                                                'qt_min':qt_min,
-                                                'qf_plus':qf_plus,
-                                                'qf_min':qf_min,
+                                                'b_f':b_f,
+                                                'bbar_f':bbar_f,
+                                                'bbar_fbar':bbar_fbar,
+                                                'b_fbar':b_fbar,
                                                 'fold_amix':fold_amix})

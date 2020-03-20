@@ -19,10 +19,10 @@ y_mix=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_upda
 name=widgets.Text(value='plots/asymmetries.eps',continuous_update=False)
 save=widgets.ToggleButton(value=False,description='Save')
 # select
-qt_plus = widgets.Checkbox(value=True,description=r'$q_t$=+1',disabled=False)
-qt_min = widgets.Checkbox(value=True,description=r'$q_t$=-1',disabled=False)
-qf_plus = widgets.Checkbox(value=True,description=r'$q_f$=+1',disabled=False)
-qf_min = widgets.Checkbox(value=True,description=r'$q_f$=-1',disabled=False)
+b_f = widgets.Checkbox(value=True,description=r'$B$$\to$$f$',disabled=False)
+bbar_f = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$f$',disabled=False)
+bbar_fbar = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$\overline{f}$',disabled=False)
+b_fbar = widgets.Checkbox(value=True,description=r'$B$$\to$$\overline{f}$',disabled=False)
 fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=False)
 k_acc= widgets.Checkbox(value=True,description=r'Acceptance',disabled=False)
 k_res= widgets.Checkbox(value=True,description=r'Resolution',disabled=False)
@@ -32,7 +32,7 @@ k_tag= widgets.Checkbox(value=True,description=r'Tagging',disabled=False)
 wbox_asymm = HBox([VBox([a_prod,a_det]),
                    VBox([xmin,xmax,y_tag,y_untag,y_mix]),
                    VBox([k_acc,k_res,k_tag,fold_amix]),
-                   VBox([qt_plus,qt_min,qf_plus,qf_min]),
+                   VBox([b_f,bbar_f,bbar_fbar,b_fbar]),
                    VBox([name,save])])
 asymm_pars = interactive_output(plot_asymmetries,{'a_prod':a_prod,'a_det':a_det,
                                             'omega':omega,'d_omega':d_omega,'eff':eff,'d_eff':d_eff,
@@ -43,8 +43,8 @@ asymm_pars = interactive_output(plot_asymmetries,{'a_prod':a_prod,'a_det':a_det,
                                             'xmin':xmin,'xmax':xmax,'y_tag':y_tag,'y_untag':y_untag,'y_mix':y_mix,
                                             'name':name,'save':save,
                                             'k_acc':k_acc,'k_res':k_res,'k_tag':k_tag,
-                                            'qt_plus':qt_plus,
-                                            'qt_min':qt_min,
-                                            'qf_plus':qf_plus,
-                                            'qf_min':qf_min,
+                                            'b_f':b_f,
+                                            'bbar_f':bbar_f,
+                                            'bbar_fbar':bbar_fbar,
+                                            'b_fbar':b_fbar,
                                             'fold_amix':fold_amix})

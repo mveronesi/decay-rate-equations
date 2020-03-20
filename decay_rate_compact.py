@@ -104,3 +104,12 @@ def Afold_qf(t,qf,
              a_prod=0,a_det=0):
     nosc = int((t[-1] - t[0])/(2*np.pi/dm))
     return np.sum(np.split(Amix_qf(t,qf,dm,dg,gs,r,delta,gamma,beta,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det),nosc),axis=0)/nosc
+
+# def Acp(first,second):
+#     num = first - second
+#     den = first + second
+#     return num/den
+#
+# def fold_asymm(t,dm,asymm):
+#     nosc = int((t[-1] - t[0])/(2*np.pi/dm))
+#     return np.sum(np.split(asymm,nosc),axis=0)/nosc

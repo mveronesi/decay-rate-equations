@@ -11,8 +11,7 @@ from plot_utils import plot_func, pp
 from plot_utils import cpv_leg, C_f_leg, S_f_leg, A_f_leg
 from plot_utils import acc_leg, asymm_leg, tag_leg, res_leg
 
-def plot_coeffs(qt_plus,qt_nul,qt_min,qf_plus,qf_min,
-                dm=17.757,dg=0.085,gs=0.664,
+def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
                 r=0.4,delta=10,gamma=60,beta=0,
                 a_acc=1.5,n_acc=1.5,b_acc=0.05,beta_acc=0.03,cutoff_acc=0.2,
                 sigma_t=0.035,
@@ -25,7 +24,13 @@ def plot_coeffs(qt_plus,qt_nul,qt_min,qf_plus,qf_min,
                 k_acc=True,
                 k_res=True,
                 k_tag=True,
-                k_asymm=True):
+                k_asymm=True,
+                b_f=True,
+                bbar_f=True,
+                bbar_fbar=True,
+                b_fbar=True,
+                u_f=True,
+                u_fbar=True):
     fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2, figsize=(25,25))
     # phases
     delta_rad = delta*np.pi/180
@@ -56,20 +61,31 @@ def plot_coeffs(qt_plus,qt_nul,qt_min,qf_plus,qf_min,
     q_list = [(1,1),(-1,1),(-1,-1),(1,-1),(0,1),(0,-1)]
     col_list = ['blue','red','blue','red','black','black']
     style_list = ['-','-','--','--','-','--']
-    qt_s = []
-    qf_s = []
-    if qt_plus: qt_s.append(+1)
-    if qt_nul: qt_s.append(0)
-    if qt_min: qt_s.append(-1)
-    if qf_plus: qf_s.append(+1)
-    if qf_min: qf_s.append(-1)
+
+    # qt_s = []
+    # qf_s = []
+    # if qt_plus: qt_s.append(+1)
+    # if qt_nul: qt_s.append(0)
+    # if qt_min: qt_s.append(-1)
+    # if qf_plus: qf_s.append(+1)
+    # if qf_min: qf_s.append(-1)
+
+    q_prod = []
+    if b_f: q_prod.append((1,1))
+    if bbar_f: q_prod.append((-1,1))
+    if bbar_fbar: q_prod.append((-1,-1))
+    if b_fbar: q_prod.append((1,-1))
+    if u_f: q_prod.append((0,1))
+    if u_fbar: q_prod.append((0,-1))
+
     # leg heads
     leg_cosh = acc_leg(a_acc,n_acc,b_acc,beta_acc,cutoff_acc) if k_acc else ''
     leg_sinh = asymm_leg(a_prod,a_det) if k_asymm else ''
     leg_cos = tag_leg(omega,d_omega,eff,d_eff) if k_tag else ''
     leg_sin = res_leg(sigma_t) if k_res else ''
     for i in range(6):
-        if q_list[i] in product(qt_s,qf_s):
+        # if q_list[i] in product(qt_s,qf_s):
+        if q_list[i] in q_prod:
             (qt,qf) = q_list[i]
             col=col_list[i]
             style=style_list[i]

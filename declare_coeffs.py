@@ -9,11 +9,13 @@ from declare_ft import omega, d_omega, eff, d_eff
 from declare_asym import a_prod, a_det
 
 # select
-qt_plus = widgets.Checkbox(value=True,description=r'$q_t$=+1',disabled=False)
-qt_min = widgets.Checkbox(value=False,description=r'$q_t$=-1',disabled=False)
-qt_nul = widgets.Checkbox(value=False,description=r'$q_t$=0',disabled=False)
-qf_plus = widgets.Checkbox(value=True,description=r'$q_f$=+1',disabled=False)
-qf_min = widgets.Checkbox(value=False,description=r'$q_f$=-1',disabled=False)
+b_f = widgets.Checkbox(value=True,description=r'$B$$\to$$f$',disabled=False)
+bbar_f = widgets.Checkbox(value=False,description=r'$\overline{B}$$\to$$f$',disabled=False)
+bbar_fbar = widgets.Checkbox(value=False,description=r'$\overline{B}$$\to$$\overline{f}$',disabled=False)
+b_fbar = widgets.Checkbox(value=False,description=r'$B$$\to$$\overline{f}$',disabled=False)
+u_f = widgets.Checkbox(value=False,description=r'$U$$\to$$f$',disabled=False)
+u_fbar = widgets.Checkbox(value=False,description=r'$U$$\to$$\overline{f}$',disabled=False)
+# select
 k_dec = widgets.Checkbox(value=True,description=r'Decay',disabled=False)
 k_acc= widgets.Checkbox(value=False,description=r'Acceptance',disabled=False)
 k_res= widgets.Checkbox(value=False,description=r'Resolution',disabled=False)
@@ -32,11 +34,10 @@ save=widgets.ToggleButton(value=False,description='Save')
 ## Decay Rate Coefficients
 wbox_coeffs = HBox([VBox([xmin,xmax,y_cosh,y_sinh,y_cos,y_sin]),
                     VBox([k_dec,k_acc,k_res,k_tag,k_asymm]),
-                    VBox([qt_plus,qt_nul,qt_min,qf_plus,qf_min]),
+                    VBox([b_f,bbar_f,bbar_fbar,b_fbar,u_f,u_fbar]),
                     VBox([name,save])
                     ])
 coeffs_pars = interactive_output(plot_coeffs,{
-                'qt_plus':qt_plus,'qt_nul':qt_nul,'qt_min':qt_min,'qf_plus':qf_plus,'qf_min':qf_min,
                 'dm':dm,'dg':dg,'gs':gs,'r':r,'delta':delta,'gamma':gamma,'beta':beta,
                 'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                 'sigma_t':sigma_t,'omega_tag':omega,'d_omega_tag':d_omega,'eff_tag':eff,'d_eff_tag':d_eff,
@@ -47,4 +48,10 @@ coeffs_pars = interactive_output(plot_coeffs,{
                 'k_acc':k_acc,
                 'k_res':k_res,
                 'k_tag':k_tag,
-                'k_asymm':k_asymm})
+                'k_asymm':k_asymm,
+                'b_f':b_f,
+                'bbar_f':bbar_f,
+                'bbar_fbar':bbar_fbar,
+                'b_fbar':b_fbar,
+                'u_f':u_f,
+                'u_fbar':u_fbar})

@@ -6,13 +6,15 @@ import matplotlib.lines as lines
 import mplhep as hep
 plt.style.use(hep.style.ATLAS)
 plt.rc('font',**{'family':'serif','serif':['Times']})
-plt.rc('text', usetex=False)
+# plt.rc('text', usetex=False)
+plt.rc('text', usetex=True)
 
 import decay_rate_compact
 from decay_rate_compact import C_qf, S_qf, A_qf
 
 lw = 2 # line width
 fs = 40 # font size
+ts = 40 # title size
 pp = 1000 # points plot
 fl = 30 # legend title font size
 
@@ -80,7 +82,7 @@ def set_ax_labels(ax,xtitle,ytitle,title,xpos=[0.95, -0.070],ypos=[-0.08, 0.9],f
     ax.set_xlabel(xtitle,fontsize = fs)
     ax.set_ylabel(ytitle,fontsize = fs)
     ax.tick_params(labelsize = fs)
-    ax.set_title(title,fontsize = fs)
+    ax.set_title(title,fontsize = ts)
     ax.xaxis.set_label_coords(xpos[0],xpos[1])
     ax.yaxis.set_label_coords(ypos[0],ypos[1])
 
@@ -183,8 +185,8 @@ def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
         circle = plt.Circle((0, 0), 2*r/(1+r**2), color='cyan',fill=False,label=r'$\sqrt{1-C_f^2}$',linewidth=lw)
         ax.add_patch(circle)
     ## Gamma
-    ax.plot(angles(0 if gamma<=np.pi/2 else -1,1 if gamma<=np.pi/2 else 0,np.tan(gamma))[0],
-            angles(0 if gamma<=np.pi/2 else -1,1 if gamma<=np.pi/2 else 0,np.tan(gamma))[1],
+    ax.plot(angles(0 if (gamma<=np.pi/2 or gamma>3*np.pi/2) else -1,1 if (gamma<=np.pi/2 or gamma>3*np.pi/2) else 0,np.tan(gamma))[0],
+            angles(0 if (gamma<=np.pi/2 or gamma>3*np.pi/2) else -1,1 if (gamma<=np.pi/2 or gamma>3*np.pi/2) else 0,np.tan(gamma))[1],
             color='orange',label=r'$\gamma-2\beta_s$',linewidth=lw)
     ## Delta
     ax.plot(angles(0 if (delta<=np.pi/2 or delta>3*np.pi/2) else -1,1 if (delta<=np.pi/2 or delta>3*np.pi/2) else 0,np.tan(delta))[0],
