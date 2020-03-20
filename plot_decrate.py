@@ -58,6 +58,6 @@ def plot_decrate(dm=17.757,dg=0.085,gs=0.664,
     plot_gamma(ax3,r,delta_rad,gamma_rad,A_f_val,S_f_val,A_fbar_val,S_fbar_val)
 
     # Plot
-    fig.tight_layout()
-    if save: fig.savefig(name)
+    # fig.tight_layout()
+    # if save: fig.savefig(name)
     plt.show()
