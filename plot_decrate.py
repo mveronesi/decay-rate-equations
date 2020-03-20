@@ -60,4 +60,4 @@ def plot_decrate(dm=17.757,dg=0.085,gs=0.664,
     # Plot
     # fig.tight_layout()
     # if save: fig.savefig(name)
-    plt.show()
+    # plt.show()
