@@ -6,7 +6,7 @@ import matplotlib.lines as lines
 import mplhep as hep
 plt.style.use(hep.style.ATLAS)
 plt.rc('font',**{'family':'serif','serif':['Times']})
-plt.rc('text', usetex=True)
+plt.rc('text', usetex=False)
 
 import decay_rate_compact
 from decay_rate_compact import C_qf, S_qf, A_qf

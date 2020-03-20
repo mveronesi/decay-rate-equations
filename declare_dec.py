@@ -18,10 +18,10 @@ y_mix=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_upda
 name=widgets.Text(value='plots/decrate.eps',continuous_update=False)#description='Save as:')
 save=widgets.ToggleButton(value=False,description='Save')
 # select
-qt_plus = widgets.Checkbox(value=True,description=r'$q_t$=+1',disabled=False)
-qt_min = widgets.Checkbox(value=True,description=r'$q_t$=-1',disabled=False)
-qf_plus = widgets.Checkbox(value=True,description=r'$q_f$=+1',disabled=False)
-qf_min = widgets.Checkbox(value=True,description=r'$q_f$=-1',disabled=False)
+qt_plus = widgets.Checkbox(value=True,description=r'$q_{t}$=+1',disabled=False)
+qt_min = widgets.Checkbox(value=True,description=r'$q_{t}$=-1',disabled=False)
+qf_plus = widgets.Checkbox(value=True,description=r'$q_{f}$=+1',disabled=False)
+qf_min = widgets.Checkbox(value=True,description=r'$q_{f}$=-1',disabled=False)
 fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=False)
 ## Decay Rate
 wbox_dec = HBox([VBox([gs,dg,dm,fold_amix]),VBox([r,delta,gamma,beta]),VBox([xmin,xmax,y_osc,y_mix]),
