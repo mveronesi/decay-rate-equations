@@ -9,7 +9,7 @@ gs=widgets.BoundedFloatText(value=0.664, min=0, max=1, step=0.001, continuous_up
 r=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.1, continuous_update=False, description=r'$r$')
 delta=widgets.BoundedFloatText(value=0, min=0, max=360, step=1, continuous_update=False, description=r'$\delta$ [$\circ$]')
 gamma=widgets.BoundedFloatText(value=0, min=0, max=360, step=1, continuous_update=False, description=r'$\gamma$ [$\circ$]')
-beta=widgets.BoundedFloatText(value=0, min=-100, max=100, step=1, continuous_update=False, description=r'$\beta_{s}$ [mrad]')
+beta=widgets.BoundedFloatText(value=0, min=-1000, max=1000, step=1, continuous_update=False, description=r'$\beta_{s}$ [mrad]')
 # plotting
 xmin=widgets.BoundedFloatText(value=0, min=0, max=100, step=1, continuous_update=False, description=r'$t_{min}$ [ps]')
 xmax=widgets.BoundedFloatText(value=5, min=0, max=100, step=1, continuous_update=False, description=r'$t_{max}$ [ps]')
