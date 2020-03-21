@@ -36,7 +36,7 @@ def plot_tagging(omega,d_omega,eff,d_eff,
                                 sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if b_fbar else False
     Bbar_fbar_t = eff_acc*P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,
                                 sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if bbar_fbar else False
-    plot_osc(ax1,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin,xmax,ymax=y_tag,title='Tagged Decay Rate',leghead=bmix_leg(dm,dg,gs))
+    plot_osc(ax1,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin,xmax,ymax=y_tag,title='Tagged Decay Rate',leghead='')
     Untag_f_t = eff_acc*P_t(t=t,qt=0,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,
                                 sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega)
     Untag_fbar_t = eff_acc*P_t(t=t,qt=0,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,
@@ -49,18 +49,18 @@ def plot_tagging(omega,d_omega,eff,d_eff,
     t_fold = fold_times(xmin_mix,xmax,dm)
     if fold_amix and (len(t_fold)>1):
         Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,
-                                        sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega)
+                                        sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if (b_f or bbar_f) else False
         Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,
-                                        sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega)
+                                        sigma_t=sigma_t,eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if (b_fbar or bbar_fbar) else False
         t_osc = np.linspace(0,2*np.pi/dm,pp)
         plot_amix(ax3,t_osc,Amix_f_t_fold,Amix_fbar_t_fold,0,2*np.pi/dm,
                   title='Folded Asymmetries',xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
                   xtitle_pos=[0.7,-0.07],ymin=-y_mix,ymax=y_mix)
     else:
         Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t,
-                            eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega)
+                            eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if (b_f or bbar_f) else False
         Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,sigma_t=sigma_t,
-                            eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega)
+                            eff=eff,d_eff=d_eff,omega=omega,d_omega=d_omega) if (b_fbar or bbar_fbar) else False
         plot_amix(ax3,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-y_mix,ymax=y_mix)
 
     # Plot

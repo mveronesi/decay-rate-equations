@@ -31,7 +31,8 @@ def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
                 b_fbar=True,
                 u_f=True,
                 u_fbar=True):
-    fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2, figsize=(25,25))
+    # fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(2,2, figsize=(25,25))
+    fig, (ax1,ax2,ax3,ax4) = plt.subplots(1,4, figsize=(40,10))
     # phases
     delta_rad = delta*np.pi/180
     gamma_rad = gamma*np.pi/180
@@ -104,13 +105,13 @@ def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
             else: tag_lab = 'U'
             ch_lab = r'$f$' if qf>0 else r'$\overline{f}$'
             plot_func(ax1,t,A_cosh,xmin=0,xmax=xmax,ymin=0,ymax=y_cosh,col=col,style=style,ytitle=r'$A\cosh(\Delta \Gamma_s t / 2)$',
-                        title=title_cpv,leghead=leg_cosh,label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.85])
+                        title=title_cpv,leghead='',label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.8])
             plot_func(ax2,t,B_sinh,xmin=0,xmax=xmax,ymin=-y_sinh,ymax=y_sinh,col=col,style=style,ytitle=r'$B\sinh(\Delta \Gamma_s t / 2)$',
-                        title=title_sinh,leghead=leg_sinh,label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.85])
+                        title=title_sinh,leghead='',label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.8])
             plot_func(ax3,t,C_cos,xmin=0,xmax=xmax,ymin=-y_cos,ymax=y_cos,col=col,style=style,ytitle=r'$C\cos(\Delta m_s t)$',
-                        title=title_cos,leghead=leg_cos,label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.88])
+                        title=title_cos,leghead='',label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.85])
             plot_func(ax4,t,D_sin,xmin=0,xmax=xmax,ymin=-y_sin,ymax=y_sin,col=col,style=style,ytitle=r'$D\sin(\Delta m_s t)$',
-                        title=title_sin,leghead=leg_sin,label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.88])
+                        title=title_sin,leghead='',label=r'{}$\to${}'.format(tag_lab,ch_lab),ypos=[-0.15, 0.85])
     # Plot
     fig.tight_layout()
     if save: fig.savefig(name)
