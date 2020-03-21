@@ -1,18 +1,21 @@
 import numpy as np
 import math
-import matplotlib
 import matplotlib.pyplot as plt
+plt.rcParams['text.usetex'] = True
+plt.ion()
+# import matplotlib
+# import matplotlib.pyplot as plt
 import matplotlib.lines as lines
-import mplhep as hep
-plt.style.use(hep.style.ATLAS)
+# import mplhep as hep
+# plt.style.use(hep.style.ATLAS)
 # plt.rc('font',**{'family':'serif','serif':['Times']})
 # plt.rc('text', usetex=False)
 # plt.rc('text', usetex=True)
 # plt.style.use(['science','ieee','no-latex'])
-from matplotlib import rc, rcParams
-rc('text', usetex=True)
-rc('font',**{'family':'serif','serif':['Times']})
-rcParams['text.latex.preamble']=[r'\usepackage{amsmath}']
+# from matplotlib import rc, rcParams
+# rc('text', usetex=True)
+# rc('font',**{'family':'serif','serif':['Times']})
+# rcParams['text.latex.preamble']=[r'\usepackage{amsmath}']
 
 import decay_rate_compact
 from decay_rate_compact import C_qf, S_qf, A_qf
