@@ -52,9 +52,9 @@ def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
     sin_t = np.sin(0.5*dm*t)
     # labels
     title_sinh = r'$(A^{\Delta\Gamma}_f,A^{\Delta\Gamma}_{\overline{f}})$ = '
-    title_sinh +='({:.2f},{:.2f})'.format(A_qf(r,delta_rad,gamma_rad,beta_rad,+1),A_qf(r,delta_rad,gamma_rad,beta_rad,-1))
+    title_sinh +='({:.2f},{:.2f})'.format(A_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=+1),A_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=-1))
     title_cos = r'$(C_f,C_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(C_qf(r,+1),C_qf(r,-1))
-    title_sin = r'$(S_f,S_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(S_qf(r,delta_rad,gamma_rad,beta_rad,+1),S_qf(r,delta_rad,gamma_rad,beta_rad,-1))
+    title_sin = r'$(S_f,S_{\overline{f}})$ = '+'({:.2f},{:.2f})'.format(S_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=+1),S_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=-1))
     title_cpv = r'$r$ = '+'{:.1f}'.format(r)
     title_cpv += r', $\delta$ = '+'{:.0f}'.format(delta) + r'$^{\circ}$'
     title_cpv += r', $\gamma$ = '+'{:.0f}'.format(gamma) + r'$^{\circ}$'
