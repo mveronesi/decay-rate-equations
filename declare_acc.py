@@ -2,7 +2,7 @@ import ipywidgets as widgets
 from ipywidgets import interact, interactive, interactive_output
 from ipywidgets import Layout, Button, Box, VBox, HBox
 from plot_acceptance import plot_acceptance
-from declare_dec import dm, dg, gs, r, delta, gamma, beta
+from declare_dec import dm, dg, gs, r, delta, gamma, beta, k
 # acceptance
 a_acc=widgets.BoundedFloatText(value=1.5, min=0, max=100, step=0.01, continuous_update=False, description=r'$a$')
 n_acc=widgets.BoundedFloatText(value=1.5, min=0, max=100, step=0.01, continuous_update=False, description=r'$n$')
@@ -23,6 +23,6 @@ wbox_acc = HBox([VBox([a_acc,n_acc,b_acc,beta_acc,cutoff_acc]),
                  VBox([name,save])])
 acc_pars = interactive_output(plot_acceptance,{'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                                 'dm':dm,'dg':dg,'gs':gs,
-                                                'r':r,'delta':delta,'gamma':gamma,'beta':beta,
+                                                'r':r,'delta':delta,'gamma':gamma,'beta':beta,'k':k,
                                                 'xmin':xmin,'xmax':xmax,'y_osc':y_osc,'y_mix':y_mix,
                                                 'name':name,'save':save,'fold_amix':fold_amix})

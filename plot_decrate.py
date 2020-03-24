@@ -14,7 +14,7 @@ from plot_utils import plot_osc, plot_amix, plot_gamma, fold_times, pp
 # gamma - degrees
 # beta - mrad
 def plot_decrate(dm=17.757,dg=0.085,gs=0.664,
-                 r=0,delta=0,gamma=0,beta=0,
+                 r=0,delta=0,gamma=0,beta=0,k=1,
                  xmin=0,xmax=5,y_osc=2,y_mix=1,
                  name='plot.eps',save=False,
                  b_f=True,
@@ -32,29 +32,29 @@ def plot_decrate(dm=17.757,dg=0.085,gs=0.664,
     # CP coefficients
     C_f_val = C_qf(r,+1)
     C_fbar_val = C_qf(r,-1)
-    A_f_val = A_qf(r,delta_rad,gamma_rad,beta_rad,+1)
-    A_fbar_val = A_qf(r,delta_rad,gamma_rad,beta_rad,-1)
-    S_f_val = S_qf(r,delta_rad,gamma_rad,beta_rad,+1)
-    S_fbar_val = S_qf(r,delta_rad,gamma_rad,beta_rad,-1)
+    A_f_val = A_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=+1)
+    A_fbar_val = A_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=-1)
+    S_f_val = S_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=+1)
+    S_fbar_val = S_qf(r,delta_rad,gamma_rad,beta_rad,k=k,qf=-1)
     # Decay Rate Equations
     t = np.linspace(xmin,xmax,pp)
-    B_f_t = P_t(t=t,qt=1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if b_f else False
-    Bbar_f_t = P_t(t=t,qt=-1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if bbar_f else False
-    B_fbar_t = P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if b_fbar else False
-    Bbar_fbar_t = P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if bbar_fbar else False
+    B_f_t = P_t(t=t,qt=1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if b_f else False
+    Bbar_f_t = P_t(t=t,qt=-1,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if bbar_f else False
+    B_fbar_t = P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if b_fbar else False
+    Bbar_fbar_t = P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if bbar_fbar else False
     plot_osc(ax1,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin,xmax,ymax=y_osc)
     # Mixing Asymmetries
     t_fold = fold_times(xmin,xmax,dm)
     if fold_amix and (len(t_fold)>1):
-        Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if (b_f or bbar_f) else False
-        Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if (bbar_fbar or bbar_fbar) else False
+        Amix_f_t_fold = Afold_qf(t=t_fold,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if (b_f or bbar_f) else False
+        Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if (bbar_fbar or bbar_fbar) else False
         t_osc = np.linspace(0,2*np.pi/dm,pp)
         plot_amix(ax2,t_osc,Amix_f_t_fold,Amix_fbar_t_fold,0,2*np.pi/dm,
                   title='Folded Asymmetries',xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
                   xtitle_pos=[0.7,-0.07],ymin=-y_mix,ymax=y_mix)
     else:
-        Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if (b_f or bbar_f) else False
-        Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad) if (bbar_fbar or bbar_fbar) else False
+        Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if (b_f or bbar_f) else False
+        Amix_fbar_t = Amix_qf(t=t,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k) if (bbar_fbar or bbar_fbar) else False
         plot_amix(ax2,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-y_mix,ymax=y_mix)
 
     # Constraints on Gamma

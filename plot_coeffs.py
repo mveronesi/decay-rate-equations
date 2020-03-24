@@ -12,7 +12,7 @@ from plot_utils import cpv_leg, C_f_leg, S_f_leg, A_f_leg
 from plot_utils import acc_leg, asymm_leg, tag_leg, res_leg
 
 def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
-                r=0.4,delta=10,gamma=60,beta=0,
+                r=0.4,delta=10,gamma=60,beta=0,k=1,
                 a_acc=1.5,n_acc=1.5,b_acc=0.05,beta_acc=0.03,cutoff_acc=0.2,
                 sigma_t=0.035,
                 omega_tag=0.35,d_omega_tag=0,eff_tag=0.8,d_eff_tag=0,
@@ -92,9 +92,9 @@ def plot_coeffs(dm=17.757,dg=0.085,gs=0.664,
             style=style_list[i]
             # Effective coefficients
             coeff_cosh = k_cosh(qt,qf,eff,d_eff,omega,d_omega,a_prod,a_det)
-            coeff_sinh = k_sinh(qt,qf,r,delta_rad,gamma_rad,beta_rad,eff,d_eff,omega,d_omega,a_prod,a_det)
+            coeff_sinh = k_sinh(qt,qf,r,delta_rad,gamma_rad,beta_rad,k,eff,d_eff,omega,d_omega,a_prod,a_det)
             coeff_cos = k_cos(qt,qf,r,dm,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det)
-            coeff_sin = k_sin(qt,qf,r,delta_rad,gamma_rad,beta_rad,dm,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det)
+            coeff_sin = k_sin(qt,qf,r,delta_rad,gamma_rad,beta_rad,k,dm,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det)
             # Effective CP coefficients
             A_cosh =  acc*dec*coeff_cosh*cosh_t
             B_sinh =  acc*dec*coeff_sinh*sinh_t

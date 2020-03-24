@@ -2,7 +2,7 @@ import ipywidgets as widgets
 from ipywidgets import interact, interactive, interactive_output
 from ipywidgets import Layout, Button, Box, VBox, HBox
 from plot_tagging import plot_tagging
-from declare_dec import dm, dg, gs, r, delta, gamma, beta
+from declare_dec import dm, dg, gs, r, delta, gamma, beta, k
 from declare_acc import a_acc, n_acc, b_acc, beta_acc, cutoff_acc
 from declare_res import sigma_t
 
@@ -38,7 +38,7 @@ tag_pars = interactive_output(plot_tagging,{'omega':omega,'d_omega':d_omega,'eff
                                             'sigma_t':sigma_t,
                                             'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                                             'dm':dm,'dg':dg,'gs':gs,
-                                            'r':r,'delta':delta,'gamma':gamma,'beta':beta,
+                                            'r':r,'delta':delta,'gamma':gamma,'beta':beta,'k':k,
                                             'xmin':xmin,'xmax':xmax,'y_tag':y_tag,'y_untag':y_untag,'y_mix':y_mix,
                                             'k_acc':k_acc,'k_res':k_res,
                                             'name':name,'save':save,

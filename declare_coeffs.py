@@ -2,7 +2,7 @@ import ipywidgets as widgets
 from ipywidgets import interact, interactive, interactive_output
 from ipywidgets import Layout, Button, Box, VBox, HBox
 from plot_coeffs import plot_coeffs
-from declare_dec import dm, dg, gs, r, delta, gamma, beta
+from declare_dec import dm, dg, gs, r, delta, gamma, beta, k
 from declare_acc import a_acc, n_acc, b_acc, beta_acc, cutoff_acc
 from declare_res import sigma_t
 from declare_ft import omega, d_omega, eff, d_eff
@@ -38,7 +38,7 @@ wbox_coeffs = HBox([VBox([xmin,xmax,y_cosh,y_sinh,y_cos,y_sin]),
                     VBox([name,save])
                     ])
 coeffs_pars = interactive_output(plot_coeffs,{
-                'dm':dm,'dg':dg,'gs':gs,'r':r,'delta':delta,'gamma':gamma,'beta':beta,
+                'dm':dm,'dg':dg,'gs':gs,'r':r,'delta':delta,'gamma':gamma,'beta':beta,'k':k,
                 'a_acc':a_acc,'n_acc':n_acc,'b_acc':b_acc,'beta_acc':beta_acc,'cutoff_acc':cutoff_acc,
                 'sigma_t':sigma_t,'omega_tag':omega,'d_omega_tag':d_omega,'eff_tag':eff,'d_eff_tag':d_eff,
                 'a_prod_asym':a_prod,'a_det_asym':a_det,
