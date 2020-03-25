@@ -29,8 +29,8 @@ def tageff(qt,eff,d_eff):
 def k_cosh(qt,qf,
            eff,d_eff,omega,d_omega,a_prod,a_det):
     if qt==0:
-        k_tag = ( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
-                + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
+        k_tag = 0.5*( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
+                    + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
     else:
         k_tag = tageff(qt,eff,d_eff)*( ( 1 - mistag(qt,omega,d_omega) )*(1-qt*a_prod)
                                            + mistag(qt,omega,d_omega)*(1+qt*a_prod) )*(1-qf*a_det)
@@ -40,8 +40,8 @@ def k_sinh(qt,qf,r,delta,gamma,beta,k,
            eff,d_eff,omega,d_omega,a_prod,a_det):
     A_f = A_qf(r,delta,gamma,beta,k=k,qf=qf)
     if qt==0:
-        k_tag = ( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
-                + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
+        k_tag = 0.5*( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
+                    + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
     else:
         k_tag = tageff(qt,eff,d_eff)*( ( 1 - mistag(qt,omega,d_omega) )*(1-qt*a_prod)
                                            + mistag(qt,omega,d_omega)*(1+qt*a_prod) )*(1-qf*a_det)
@@ -52,8 +52,8 @@ def k_cos(qt,qf,r,dm,sigma_t,
     C_f = C_qf(r,qf)
     k_dil = dil(sigma_t,dm)
     if qt==0:
-        k_tag = ( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
-                - ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
+        k_tag = 0.5*( ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
+                    - ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
     else:
         k_tag = qt*tageff(qt,eff,d_eff)*( ( 1 - mistag(qt,omega,d_omega) )*(1-qt*a_prod)
                                               - mistag(qt,omega,d_omega)*(1+qt*a_prod) )*(1-qf*a_det)
@@ -64,8 +64,8 @@ def k_sin(qt,qf,r,delta,gamma,beta,k,dm,sigma_t,
     S_f = S_qf(r,delta,gamma,beta,k=k,qf=qf)
     k_dil = dil(sigma_t,dm)
     if qt==0:
-        k_tag = ( - ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
-                  + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
+        k_tag = 0.5*( - ( 1 - tageff(+1,eff,d_eff) )*(1-a_prod)
+                      + ( 1 - tageff(-1,eff,d_eff) )*(1+a_prod) )*(1-qf*a_det)
     else:
         k_tag = -qt*tageff(qt,eff,d_eff)*( ( 1 - mistag(qt,omega,d_omega) )*(1-qt*a_prod)
                                                - mistag(qt,omega,d_omega)*(1+qt*a_prod) )*(1-qf*a_det)
