@@ -82,7 +82,7 @@ def P_t(t,qt,qf,
     B = k_sinh(qt,qf,r,delta,gamma,beta,k,eff,d_eff,omega,d_omega,a_prod,a_det)
     C = k_cos(qt,qf,r,dm,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det)
     D = k_sin(qt,qf,r,delta,gamma,beta,k,dm,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det)
-    return np.exp(-gs*t)*(A*np.cosh(0.5*dg*t)+B*np.sinh(0.5*dg*t)+C*np.cos(dm*t)+D*np.sin(dm*t))
+    return 0.5*np.exp(-gs*t)*(A*np.cosh(0.5*dg*t)+B*np.sinh(0.5*dg*t)+C*np.cos(dm*t)+D*np.sin(dm*t))
 
 def Amix_qf(t,qf,
             dm,dg,gs,
@@ -105,11 +105,11 @@ def Afold_qf(t,qf,
     nosc = int((t[-1] - t[0])/(2*np.pi/dm))
     return np.sum(np.split(Amix_qf(t,qf,dm,dg,gs,r,delta,gamma,beta,k,sigma_t,eff,d_eff,omega,d_omega,a_prod,a_det),nosc),axis=0)/nosc
 
-# def Acp(first,second):
-#     num = first - second
-#     den = first + second
-#     return num/den
-#
+def Acp(first,second):
+    num = first - second
+    den = first + second
+    return num/den
+
 # def fold_asymm(t,dm,asymm):
 #     nosc = int((t[-1] - t[0])/(2*np.pi/dm))
 #     return np.sum(np.split(asymm,nosc),axis=0)/nosc

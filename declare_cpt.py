@@ -1,38 +1,35 @@
 import ipywidgets as widgets
 from ipywidgets import interact, interactive, interactive_output
 from ipywidgets import Layout, Button, Box, VBox, HBox
-from plot_decrate import plot_decrate
-# bmix - cp parameters
+from plot_decrate_cpt import plot_decrate_cpt
+# bmix
 dm=widgets.BoundedFloatText(value=17.749, min=0, max=20, step=0.001, continuous_update=False, description=r'$\Delta m_{s}$ [ps$^{-1}$]')
 dg=widgets.BoundedFloatText(value=0.083, min=0, max=1, step=0.001, continuous_update=False, description=r'$\Delta \Gamma_{s}$ [ps$^{-1}$]')
 gs=widgets.BoundedFloatText(value=0.6608, min=0, max=1, step=0.001, continuous_update=False, description=r'$\Gamma_{s}$ [ps$^{-1}$]')
-r=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.1, continuous_update=False, description=r'$r$')
-delta=widgets.BoundedFloatText(value=0, min=0, max=360, step=1, continuous_update=False, description=r'$\delta$ [$\circ$]')
-gamma=widgets.BoundedFloatText(value=0, min=0, max=360, step=1, continuous_update=False, description=r'$\gamma$ [$\circ$]')
-beta=widgets.BoundedFloatText(value=0, min=-1000, max=1000, step=1, continuous_update=False, description=r'$\beta_{s}$ [mrad]')
-k=widgets.BoundedFloatText(value=1, min=0, max=1, step=0.01, continuous_update=False, description=r'$k$')
+# afs- cpt
+afs=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.001, continuous_update=False, description=r'$a_{fs}$')
+rez=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.001, continuous_update=False, description=r'$Re(z)$')
+imz=widgets.BoundedFloatText(value=0, min=0, max=1, step=0.001, continuous_update=False, description=r'$Im(z)$')
 # plotting
 xmin=widgets.BoundedFloatText(value=0, min=0, max=100, step=1, continuous_update=False, description=r'$t_{min}$ [ps]')
 xmax=widgets.BoundedFloatText(value=5, min=0, max=100, step=1, continuous_update=False, description=r'$t_{max}$ [ps]')
 y_osc=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{dec}$ [a.u.]')
-y_mix=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{mix}$ [a.u.]')
-name=widgets.Text(value='plots/decrate.eps',continuous_update=False)#description='Save as:')
+# y_mix=widgets.BoundedFloatText(value=1, min=0, max=10, step=0.1, continuous_update=False, description=r'$y_{mix}$ [a.u.]')
+name=widgets.Text(value='plots/decrate_cpt.eps',continuous_update=False)#description='Save as:')
 save=widgets.ToggleButton(value=False,description='Save')
 # select
 b_f = widgets.Checkbox(value=True,description=r'$B$$\to$$f$',disabled=False)
 bbar_f = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$f$',disabled=False)
 bbar_fbar = widgets.Checkbox(value=True,description=r'$\overline{B}$$\to$$\overline{f}$',disabled=False)
 b_fbar = widgets.Checkbox(value=True,description=r'$B$$\to$$\overline{f}$',disabled=False)
-fold_amix = widgets.Checkbox(value=True,description=r'fold $A_{mix}$',disabled=False)
 ## Decay Rate
-wbox_dec = HBox([VBox([gs,dg,dm,fold_amix]),VBox([r,delta,gamma,beta,k]),VBox([xmin,xmax,y_osc,y_mix]),
+wbox_cpt = HBox([VBox([gs,dg,dm]),VBox([rez,imz,afs]),VBox([xmin,xmax,y_osc]),
                  VBox([b_f,bbar_f,bbar_fbar,b_fbar]),VBox([name,save])])
-decrate_pars = interactive_output(plot_decrate,{'dm':dm,'dg':dg,'gs':gs,
-                                                'r':r,'delta':delta,'gamma':gamma,'beta':beta,'k':k,
-                                                'xmin':xmin,'xmax':xmax,'y_osc':y_osc,'y_mix':y_mix,
+decrate_cpt = interactive_output(plot_decrate_cpt,{'dm':dm,'dg':dg,'gs':gs,
+                                                'afs':afs,'rez':rez,'imz':imz,
+                                                'xmin':xmin,'xmax':xmax,'y_osc':y_osc,
                                                 'name':name,'save':save,
                                                 'b_f':b_f,
                                                 'bbar_f':bbar_f,
                                                 'bbar_fbar':bbar_fbar,
-                                                'b_fbar':b_fbar,
-                                                'fold_amix':fold_amix})
+                                                'b_fbar':b_fbar})

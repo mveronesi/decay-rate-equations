@@ -112,7 +112,7 @@ def plot_osc(ax,t,B_f_t,Bbar_f_t,B_fbar_t,Bbar_fbar_t,xmin=0,xmax=5,ymin=0,ymax=
     if isinstance(Bbar_f_t,np.ndarray): ax.plot(t,Bbar_f_t,color='red',linewidth=lw,label=r'$\overline{B}\to f$')
     if isinstance(Bbar_fbar_t,np.ndarray): ax.plot(t,Bbar_fbar_t,color='blue',linewidth=lw,linestyle='--',label=r'$\overline{B}\to \overline{f}$')
     if isinstance(B_fbar_t,np.ndarray): ax.plot(t,B_fbar_t,color='red',linewidth=lw,linestyle='--',label=r'$B\to \overline{f}$')
-    set_ax_labels(ax,'t [ps]',r'$d\Gamma/dt$',title)
+    set_ax_labels(ax,'t [ps]',r'$d\Gamma/dt$ [a.u.]',title,ypos=[-0.08, 0.85])
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='upper right',fontsize=fs,fancybox=True,title=leghead)
     plt.setp(legend.get_title(),fontsize=fl)

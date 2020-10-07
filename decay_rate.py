@@ -31,12 +31,12 @@ def A_fbar(r,delta,gamma,beta):
 def exp_dec(t,gs):
     return np.exp(-gs*t)
 
-def dec_rate(t,dm,dg,gs,D,C,S,sigma_t=0):
+def dec_rate(t,dm,dg,gs,D,C,S,sigma_t=0,A=1):
     if sigma_t>0:
         dil = np.exp(-(sigma_t**2)*(dm**2)/2)
     else:
         dil = 1
-    return np.exp(-gs*t)*(np.cosh(dg*t/2)+D*np.sinh(dg*t/2)+dil*C*np.cos(dm*t)+dil*S*np.sin(dm*t))
+    return np.exp(-gs*t)*(A*np.cosh(dg*t/2)+D*np.sinh(dg*t/2)+dil*C*np.cos(dm*t)+dil*S*np.sin(dm*t))
 
 def B_f(t,dm,dg,gs,r,delta,gamma,beta,sigma_t=0):
     C_f_val = C_f(r)
