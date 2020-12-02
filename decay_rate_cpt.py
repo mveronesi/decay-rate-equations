@@ -44,3 +44,13 @@ def P_t_fs(t,qt,qf,
     else:
         pre_k = (1-qt*afs)*np.sqrt((1-rez**2+imz**2)**2+4*(rez**2)*(imz**2))
     return pre_k*0.5*np.exp(-gs*t)*(A*np.cosh(0.5*dg*t)+B*np.sinh(0.5*dg*t)+C*np.cos(dm*t)+D*np.sin(dm*t))
+
+def Acp(first,second):
+    np.seterr(divide='ignore', invalid='ignore')
+    num = first - second
+    den = first + second
+    return num/den
+    # if (0 in den):
+    #     return num/den
+    # else:
+    #     return den

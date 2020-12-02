@@ -155,14 +155,25 @@ def plot_res(ax,sigma_t,xmin=-0.35,xmax=0.35,title='Time Resolution',ytitle='',l
 
 # Mixing Asymmetry
 def plot_amix(ax,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-1,ymax=1,
+              f_lab=r'$f$',fbar_lab=r'$\overline{f}$',
               title='Mixing Asymmetries',xtitle='t [ps]',xtitle_pos = [0.95, -0.070],
+              ytitle=r'$A_{\mathrm{mix}}$',
               leghead=''):
-    if isinstance(Amix_f_t,np.ndarray): ax.plot(t,Amix_f_t,linewidth=lw,color='black',label=r'$f$')
-    if isinstance(Amix_fbar_t,np.ndarray): ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=r'$\overline{f}$')
-    set_ax_labels(ax,xtitle,r'$A_{\mathrm{mix}}$',title,xtitle_pos)
+    if isinstance(Amix_f_t,np.ndarray): ax.plot(t,Amix_f_t,linewidth=lw,color='black',label=f_lab)
+    if isinstance(Amix_fbar_t,np.ndarray): ax.plot(t,Amix_fbar_t,linewidth=lw,color='red',linestyle='--',label=fbar_lab)
+    set_ax_labels(ax,xtitle,ytitle,title,xtitle_pos)
     set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
     legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True,title=leghead)
     plt.setp(legend.get_title(),fontsize=fl)
+
+def plot_acp(ax,t,Acp,xmin,xmax,ymin=-1,ymax=1,
+             lc='blue',xtitle='t [ps]',xtitle_pos = [0.95, -0.070],
+             ytitle=r'$A_{CP}$',leghead=''):
+    ax.plot(t,Acp,linewidth=lw,color=lc,label='')
+    set_ax_labels(ax,xtitle,ytitle,'',xtitle_pos)
+    set_ax_lim(ax,[xmin,xmax],[ymin,ymax])
+    # legend = ax.legend(loc='lower left',fontsize=fs,fancybox=True,title=leghead)
+    # plt.setp(legend.get_title(),fontsize=fl)
 
 def fold_times(xmin,xmax,dm):
     first_osc = math.ceil(xmin/(2*np.pi/dm))
@@ -177,7 +188,7 @@ def fold_times(xmin,xmax,dm):
         return [0]
 
 # Constraints On Gamma
-def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
+def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val,title= r'Constraints on $\gamma$'):
     line = np.linspace(-1,1,pp)
     zero = np.zeros(pp)
     ax.plot(zero,line,color='black')
@@ -209,6 +220,6 @@ def plot_gamma(ax,r,delta,gamma,A_f_val,S_f_val,A_fbar_val,S_fbar_val):
     set_ax_lim(ax,[-1,1],[-1,1])
     set_ax_labels(ax,r'$2r/(1+r^2)\cos((\gamma-2\beta_s) \pm \delta)$',
                      r'$2r/(1+r^2)\sin((\gamma-2\beta_s) \pm \delta)$',
-                     r'Constraints on $\gamma$',
+                     title,
                      xpos=[0.65, -0.070],ypos=[-0.08, 0.65],
                      fs=35)

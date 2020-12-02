@@ -33,8 +33,11 @@ def plot_acceptance(a_acc,n_acc,b_acc,beta_acc,cutoff_acc,
     B_fbar_obs_t = eff_acc*P_t(t=t,qt=1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k)
     Bbar_fbar_obs_t = eff_acc*P_t(t=t,qt=-1,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k)
     tot_dec = B_f_obs_t + Bbar_f_obs_t + B_fbar_obs_t + Bbar_fbar_obs_t
-    plot_acc(ax1,t,tot_dec,xmin,xmax,ymin=0,ymax=y_osc,leghead='')
-    plot_acc(ax2,t,eff_acc,xmin,xmax,ymin=0,ymax=1,title='Acceptance',ytitle=r'$\varepsilon(t)$',
+    plot_acc(ax1,t,tot_dec,xmin,xmax,ymin=0,ymax=y_osc,leghead='',title='')
+    plot_acc(ax2,t,eff_acc,xmin,xmax,ymin=0,ymax=1,
+                # title='Acceptance',
+                title = '',
+                ytitle=r'$\varepsilon(t)$',
                 leghead=acc_leg(a_acc,n_acc,b_acc,beta_acc,cutoff_acc),legcoo='lower right')
     # Mixing Asymmetry
     xmin_mix = max(np.power(b_acc,1./n_acc)/a_acc,cutoff_acc)
@@ -44,7 +47,9 @@ def plot_acceptance(a_acc,n_acc,b_acc,beta_acc,cutoff_acc,
         Amix_fbar_t_fold = Afold_qf(t=t_fold,qf=-1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k)
         t_osc = np.linspace(0,2*np.pi/dm,pp)
         plot_amix(ax3,t_osc,Amix_f_t_fold,Amix_fbar_t_fold,0,2*np.pi/dm,
-                  title='Folded Asymmetries',xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
+                  # title='Folded Asymmetries',
+                  title='',
+                  xtitle=r't modulo $2\pi/\Delta m_{s}$ [ps]',
                   xtitle_pos=[0.7,-0.07],ymin=-y_mix,ymax=y_mix)
     else:
         Amix_f_t = Amix_qf(t=t,qf=1,dm=dm,dg=dg,gs=gs,r=r,delta=delta_rad,gamma=gamma_rad,beta=beta_rad,k=k)

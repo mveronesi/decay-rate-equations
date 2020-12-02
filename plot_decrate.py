@@ -60,7 +60,7 @@ def plot_decrate(dm=17.757,dg=0.085,gs=0.664,
         plot_amix(ax2,t,Amix_f_t,Amix_fbar_t,xmin,xmax,ymin=-y_mix,ymax=y_mix,title='')
 
     # Constraints on Gamma
-    plot_gamma(ax3,r,delta_rad,gamma_rad-2*beta_rad,A_f_val,S_f_val,A_fbar_val,S_fbar_val)
+    plot_gamma(ax3,r,delta_rad,gamma_rad-2*beta_rad,A_f_val,S_f_val,A_fbar_val,S_fbar_val,title='')
 
     # Plot
     fig.tight_layout()
